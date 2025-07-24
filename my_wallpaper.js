@@ -1,18 +1,19 @@
 //your parameter variables go here!
 
 
-
-
-
 // frog paramiters
+let drawFrog = (true);
 let frogColour = [116,228,157]; //48, 227, 122 - 116, 228, 157 - 116, 228, 144
+let frogOutlineColour = [73, 172, 103]; 
+let frogOutlineThickness = (1);
+let drawBackline = (true); //toggles if frog has "full outline"
+let frogBacklineColour = [50, 143, 78]; //62, 158, 91
+let frogBacklineThickness = (2); // to be visible must be bigger than "frogOutlineThickness" -best 2
 let frogOriginX = (100); // Xpos of frog centre
 let frogOriginY = (100); // Ypos of frog centre
 let frogWidth = (100); //width of frog body
-
 let mouthHeight = (70);
-let UwU = (false);
-
+let UwU = (false); //changes mouth shape
 let eyelidSize = (35); //size of green circle around eyes -25
 let eyeSize = (30); //size of white eye part -12  -funny: 30
 let eyepupilSize = (23); //size of pupil -5 -cute: 25
@@ -22,20 +23,25 @@ let eyeOffsetY = (43); // Y distance aka height of eye from centre  -best 43
 
 //added if statements:
   //if (eyepupilSize > 20) //creates eye sparkle
- 
+  //if (UwU) //changes mouth from :3 to :)
+  //if (drawFrog) //changes things in cheese function if frog is active (frog holds cheese)
+  //if (drawBackline)
+  //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
 
 
-// cheese paramiters
-// let cheeseColour = [237, 206, 52]; // og colour: 237, 206, 52
-// let holeSize = (30); // og 30
-// let holeColour = [237, 197, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154
-// let holelineThickness = (2); 
-// let outlineColour = [237, 191, 52]; // og colour: 237, 191, 52
-// let outlineThickness = (2); // og 2
-// let backlineColour = [0, 0, 0]; //og 0
-// let backlineThickness = (10); // to be visible must be bigger than "outlineThickness"
-// let transX = (27); //move cheese X axis (og left corner 0,0) -best 27
-// let transY = (75); //move cheese y axis (og left corner 0,0) -best 75
+
+//cheese paramiters
+let drawCheese = (false);
+let cheeseColour = [237, 206, 52]; // og colour: 237, 206, 52
+let holeSize = (30); // og 30
+let holeColour = [237, 197, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154
+let holelineThickness = (2); 
+let cheeseOutlineColour = [237, 191, 52]; // og colour: 237, 191, 52
+let cheeseOutlineThickness = (2); // og 2
+let cheeseBacklineColour = [227, 178, 32]; //og 0
+let cheeseBacklineThickness = (5); // to be visible must be bigger than "outlineThickness"
+let cheeseTransX = (27); //move cheese X axis (og left corner 0,0) -best 27
+let cheeseTransY = (75); //move cheese y axis (og left corner 0,0) -best 75
 
 
 function setup_wallpaper(pWallpaper) {
@@ -59,15 +65,95 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   angleMode(DEGREES);
   //coords ();
   //grid();
-  //cheese ();
-  frog ();
-  
 
+
+  if (drawFrog){
+    frog ();
+  }
+  
+  if (drawCheese){
+    cheese ();
+  }
   
 }
 
 
 function frog (){
+
+
+  //backline
+if (drawBackline){
+  strokeWeight (frogBacklineThickness); //changes Backline thickeness
+  stroke (frogBacklineColour);
+  fill (frogColour)
+  ellipse (frogOriginX, frogOriginY, frogWidth, frogWidth); //body
+  ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //left eye
+  ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //right eye
+
+  //arm backline   
+    push ();
+      if (drawCheese){
+      rotate (180);
+      translate (-275, -185);
+    }
+    beginShape ();
+    curveVertex (110, 100)
+    curveVertex (130, 90) 
+    curveVertex (150, 70) 
+    curveVertex (160, 80) 
+    curveVertex (140, 100)
+    curveVertex (120, 120)
+    endShape ();
+
+    pop ();
+    //left hand
+    push ();
+    if (drawCheese){
+      rotate (180);
+      translate (-130, -185);
+    }
+    scale (-1, 1);
+    translate (-200, 0)
+    beginShape ();
+    curveVertex (110, 100)
+    curveVertex (130, 90) 
+    curveVertex (150, 70) 
+    curveVertex (160, 80) 
+    curveVertex (140, 100)
+    curveVertex (120, 120)
+    endShape ();
+
+    pop();
+
+  //feet backline
+    //right foot
+    beginShape ();
+    curveVertex (125, 130);
+    curveVertex (130, 135); 
+    curveVertex (134, 150); //right toe
+    curveVertex (122, 150); //left toe
+    curveVertex (115, 140);
+    curveVertex (105, 130);
+    endShape ();
+
+    //left foot
+    push ();
+
+    scale (-1, 1);
+    translate (-200, 0)
+    beginShape ();
+    curveVertex (125, 130);
+    curveVertex (130, 135); 
+    curveVertex (134, 150); //right toe
+    curveVertex (122, 150); //left toe
+    curveVertex (115, 140);
+    curveVertex (105, 130);
+    endShape ();
+
+    pop ();
+
+
+  }
 
   //body
   strokeWeight (0);
@@ -78,29 +164,27 @@ function frog (){
   //mouth
   if (UwU) {
   // -> :3
-  strokeWeight (1);
-  stroke (73, 172, 103); //41, 194, 104
+  strokeWeight (frogOutlineThickness);
+  stroke (frogOutlineColour); //41, 194, 104
   noFill ();
   arc (96.25, mouthHeight, 7.5, 7.5, 0, 180);
   arc (104.25, mouthHeight, 7.5, 7.5, 0, 180);
   }
 
   else {
-
-  strokeWeight (1);
-  stroke (73, 172, 103); //41, 194, 104
+  // -> :)
+  strokeWeight (frogOutlineThickness);
+  stroke (frogOutlineColour); //41, 194, 104
   arc (100, mouthHeight, 20, 20, 45, 115);
 
 
   // -> :D
-  // strokeWeight (1);
-  // stroke (73, 172, 103); //41, 194, 104
+  // strokeWeight (frogOutlineThickness);
+  // stroke (frogOutlineColour); //41, 194, 104
   // fill (79, 198, 121);
   // arc (100, mouthHeight, 20, 20, 0, 180, CHORD);
 
   }
-
-
 
 
   //eyes
@@ -123,6 +207,7 @@ function frog (){
 
   //eyesparkle
   if (eyepupilSize > 20){
+ 
     //left eye
     //long stroke
     strokeWeight (2);
@@ -147,9 +232,18 @@ function frog (){
     arc (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyepupilSize-7, eyepupilSize-7, 220, 225);
   }
 
+  
 //hands
-strokeWeight (1);
-stroke (73, 172, 103);
+strokeWeight (frogOutlineThickness);
+stroke (frogOutlineColour);
+fill (frogColour) //frog colour
+
+push();
+//right hand
+if (drawCheese){
+  rotate (180);
+  translate (-275, -185);
+}
 beginShape ();
 curveVertex (110, 100)
 curveVertex (130, 90) 
@@ -159,8 +253,18 @@ curveVertex (140, 100)
 curveVertex (120, 120)
 endShape ();
 
+pop ();
+//left hand
+push ();
 
-translate (-75, 0);
+if (drawCheese){
+
+  rotate (180);
+  translate (-130, -185);
+}
+
+scale (-1, 1);
+translate (-200, 0)
 beginShape ();
 curveVertex (110, 100)
 curveVertex (130, 90) 
@@ -169,18 +273,78 @@ curveVertex (160, 80)
 curveVertex (140, 100)
 curveVertex (120, 120)
 endShape ();
-translate (50, 0);
+
+pop();
+
+
+//feet
+strokeWeight (frogOutlineThickness);
+stroke (frogOutlineColour);
+fill (frogColour) //frog colour
+
+//right foot
+beginShape ();
+curveVertex (125, 130);
+curveVertex (130, 135); 
+curveVertex (134, 150); //right toe
+curveVertex (122, 150); //left toe
+curveVertex (115, 140);
+curveVertex (105, 130);
+endShape ();
+
+//left foot
+push ();
+
+scale (-1, 1);
+translate (-200, 0)
+beginShape ();
+curveVertex (125, 130);
+curveVertex (130, 135); 
+curveVertex (134, 150); //right toe
+curveVertex (122, 150); //left toe
+curveVertex (115, 140);
+curveVertex (105, 130);
+endShape ();
+
+pop ();
+
+
+
+
+
+
+
+// //funny stuff happens
+// push ();
+
+// scale (1.1)
+// frog ();
+
+// pop ();
+
+
+
 }
 
 
 
 function cheese (){ 
+   
+  push ();
 
-  translate(transX, transY);
+  if (drawFrog){ //makes frog hold cheese
+
+    translate (frogOriginX-16 ,frogOriginY)
+    scale (0.25);
+  }
+  else {
+
+    translate(cheeseTransX, cheeseTransY);
+  }
   
   //backline
-  strokeWeight (backlineThickness);
-  stroke (backlineColour);
+  strokeWeight (cheeseBacklineThickness);
+  stroke (cheeseBacklineColour);
   noFill ();
   beginShape ();
   vertex (0, 0); //top left corner of square
@@ -194,7 +358,7 @@ function cheese (){
 
   //cheese
   strokeWeight (1);
-  stroke (outlineColour);
+  stroke (cheeseOutlineColour);
   fill (cheeseColour);
   
    beginShape ();
@@ -217,11 +381,11 @@ function cheese (){
   arc (27, -16.5, holeSize, holeSize, 330, 148, CHORD);
 
   //cheese middle line
-  strokeWeight (outlineThickness);
+  strokeWeight (cheeseOutlineThickness);
   line (0, 0, 145, 0);
 
   //outline
-  strokeWeight (outlineThickness);
+  strokeWeight (cheeseOutlineThickness);
   noFill ();
    beginShape ();
   vertex (0, 0); //top left corner of square
@@ -232,8 +396,7 @@ function cheese (){
   endShape (CLOSE);
 
 
-
-  translate(-transX, -transY);
+   pop ();
 }
 
 
