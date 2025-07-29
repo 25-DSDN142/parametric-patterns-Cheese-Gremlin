@@ -3,29 +3,30 @@
 
 // frog paramiters
 let drawFrog = (true);
+let frogSize = (2);
 let frogColour = [116,228,157]; //48, 227, 122 - 116, 228, 157 - 116, 228, 144
 let frogOutlineColour = [73, 172, 103]; 
-let frogOutlineThickness = (1);
-let drawBackline = (true); //toggles if frog has "full outline"
-let frogBacklineColour = [50, 143, 78]; //62, 158, 91
-let frogBacklineThickness = (2); // to be visible must be bigger than "frogOutlineThickness" -best 2
+let frogOutlineThickness = (1); // -best: 1
+let drawBackline = (true); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
+let frogBacklineColour = [8, 189, 162]; // dark green: 50, 143, 78 //drak turquoise: 8, 189, 162
+let frogBacklineThickness = (10); // to be visible must be bigger than "frogOutlineThickness" -best 5
 let frogOriginX = (100); // Xpos of frog centre
 let frogOriginY = (100); // Ypos of frog centre
 let frogWidth = (100); //width of frog body
-let mouthHeight = (70);
+let mouthHeight = (-30);// is added to frogOriginY (more negative=higher and more postive=lower) -best -30
 let UwU = (false); //changes mouth shape
-let eyelidSize = (35); //size of green circle around eyes -25
-let eyeSize = (30); //size of white eye part -12  -funny: 30
-let eyepupilSize = (23); //size of pupil -5 -cute: 25
-let eyeOffsetX = (25); // X distance of eye from centre  -best 25
-let eyeOffsetY = (43); // Y distance aka height of eye from centre  -best 43
+let eyeSize = (25); //size of white eye part -min 20 or else goofy  -sparkle: >25
+let eyelidSize = (eyeSize+5); //size of green circle around eyes (change number to chang difference/space between eyeLid and eye (white part)) -best:5
+let eyepupilSize = (eyeSize-5); //size of pupil -best: 5 smaller than eyeSize -for sparkle: total>20 -scared: make 15smaller than eyeSize
+let eyeOffsetX = (25); // X distance of eyes from centre  -best 25 -goofy: 15
+let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
 //added if statements:
   //if (eyepupilSize > 20) //creates eye sparkle
   //if (UwU) //changes mouth from :3 to :)
   //if (drawFrog) //changes things in cheese function if frog is active (frog holds cheese)
-  //if (drawBackline)
+  //if (drawBackline) //draws backline
   //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
 
 
@@ -81,6 +82,11 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 function frog (){
 
 
+  scale (frogSize);
+  translate (-frogOriginX/frogSize, -frogOriginY/frogSize);
+  //translate (frogSize/-frogOriginX, frogSize/-frogOriginY);
+
+
   //backline
 if (drawBackline){
   strokeWeight (frogBacklineThickness); //changes Backline thickeness
@@ -97,12 +103,12 @@ if (drawBackline){
       translate (-275, -185);
     }
     beginShape ();
-    curveVertex (110, 100)
-    curveVertex (130, 90) 
-    curveVertex (150, 70) 
-    curveVertex (160, 80) 
-    curveVertex (140, 100)
-    curveVertex (120, 120)
+    curveVertex (frogOriginX+10, frogOriginY)
+    curveVertex (frogOriginX+30, frogOriginY-10) 
+    curveVertex (frogOriginX+50, frogOriginY-30) 
+    curveVertex (frogOriginX+60, frogOriginY-20) 
+    curveVertex (frogOriginX+40, frogOriginY)
+    curveVertex (frogOriginX+20, frogOriginY+20)
     endShape ();
 
     pop ();
@@ -113,14 +119,14 @@ if (drawBackline){
       translate (-130, -185);
     }
     scale (-1, 1);
-    translate (-200, 0)
+    translate (-frogOriginX*2, 0)
     beginShape ();
-    curveVertex (110, 100)
-    curveVertex (130, 90) 
-    curveVertex (150, 70) 
-    curveVertex (160, 80) 
-    curveVertex (140, 100)
-    curveVertex (120, 120)
+    curveVertex (frogOriginX+10, frogOriginY)
+    curveVertex (frogOriginX+30, frogOriginY-10) 
+    curveVertex (frogOriginX+50, frogOriginY-30) 
+    curveVertex (frogOriginX+60, frogOriginY-20) 
+    curveVertex (frogOriginX+40, frogOriginY)
+    curveVertex (frogOriginX+20, frogOriginY+20)
     endShape ();
 
     pop();
@@ -128,26 +134,26 @@ if (drawBackline){
   //feet backline
     //right foot
     beginShape ();
-    curveVertex (125, 130);
-    curveVertex (130, 135); 
-    curveVertex (134, 150); //right toe
-    curveVertex (122, 150); //left toe
-    curveVertex (115, 140);
-    curveVertex (105, 130);
+    curveVertex (frogOriginX+25, frogOriginY+30);
+    curveVertex (frogOriginX+30, frogOriginY+35); 
+    curveVertex (frogOriginX+34, frogOriginY+50); //right toe
+    curveVertex (frogOriginX+22, frogOriginY+50); //left toe
+    curveVertex (frogOriginX+15, frogOriginY+40);
+    curveVertex (frogOriginX+5, frogOriginY+30);
     endShape ();
 
     //left foot
     push ();
 
     scale (-1, 1);
-    translate (-200, 0)
+    translate (-frogOriginX*2, 0)
     beginShape ();
-    curveVertex (125, 130);
-    curveVertex (130, 135); 
-    curveVertex (134, 150); //right toe
-    curveVertex (122, 150); //left toe
-    curveVertex (115, 140);
-    curveVertex (105, 130);
+    curveVertex (frogOriginX+25, frogOriginY+30);
+    curveVertex (frogOriginX+30, frogOriginY+35); 
+    curveVertex (frogOriginX+34, frogOriginY+50); //right toe
+    curveVertex (frogOriginX+22, frogOriginY+50); //left toe
+    curveVertex (frogOriginX+15, frogOriginY+40);
+    curveVertex (frogOriginX+5, frogOriginY+30);
     endShape ();
 
     pop ();
@@ -155,8 +161,19 @@ if (drawBackline){
 
   }
 
+  //eyelid (needs to be behind body)
+  //left
+  strokeWeight (frogOutlineThickness);
+  stroke (frogOutlineColour); 
+  fill (frogColour) //frog colour
+  ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //eyelid
+  //right
+  fill (frogColour) //frog colour
+  ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //eyelid
+
   //body
-  strokeWeight (0);
+  strokeWeight (frogOutlineThickness);
+  stroke (frogOutlineColour); 
   fill (frogColour) //frog colour
   ellipse (frogOriginX, frogOriginY, frogWidth, frogWidth);
 
@@ -167,38 +184,42 @@ if (drawBackline){
   strokeWeight (frogOutlineThickness);
   stroke (frogOutlineColour); //41, 194, 104
   noFill ();
-  arc (96.25, mouthHeight, 7.5, 7.5, 0, 180);
-  arc (104.25, mouthHeight, 7.5, 7.5, 0, 180);
+  arc (frogOriginX-3.75, frogOriginY+mouthHeight, 7.5, 7.5, 0, 180); //left mouth arc
+  arc (frogOriginX+4.25, frogOriginY+mouthHeight, 7.5, 7.5, 0, 180); //right mouth arc
   }
 
   else {
   // -> :)
   strokeWeight (frogOutlineThickness);
   stroke (frogOutlineColour); //41, 194, 104
-  arc (100, mouthHeight, 20, 20, 45, 115);
+  arc (frogOriginX, frogOriginY+mouthHeight, 20, 20, 45, 115);
 
 
   // -> :D
   // strokeWeight (frogOutlineThickness);
   // stroke (frogOutlineColour); //41, 194, 104
   // fill (79, 198, 121);
-  // arc (100, mouthHeight, 20, 20, 0, 180, CHORD);
+  // arc (frogOriginX, frogOriginY+mouthHeight, 20, 20, 0, 180, CHORD);
 
   }
 
 
   //eyes
   //left eye
+  
+  // strokeWeight (frogOutlineThickness);
+  // noFill ();
+  // arc (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize, eyelidSize, 142, 337); //eyelid outlide
   strokeWeight (0);
   fill (frogColour) //frog colour
-  ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //eyelid
+  ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize-frogOutlineThickness); //eyelid
   fill (255); //white
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyeSize); // white eye part
   fill (0); //black
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyepupilSize); // pupil
   //right eye
   fill (frogColour) //frog colour
-  ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize); //eyelid
+  ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize-frogOutlineThickness); //eyelid
   fill (255); //white
   ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyeSize); // white eye part
   fill (0); //black
@@ -242,15 +263,15 @@ push();
 //right hand
 if (drawCheese){
   rotate (180);
-  translate (-275, -185);
+  translate (-frogOriginX-175, -frogOriginY-85);
 }
 beginShape ();
-curveVertex (110, 100)
-curveVertex (130, 90) 
-curveVertex (150, 70) 
-curveVertex (160, 80) 
-curveVertex (140, 100)
-curveVertex (120, 120)
+curveVertex (frogOriginX+10, frogOriginY)
+curveVertex (frogOriginX+30, frogOriginY-10) 
+curveVertex (frogOriginX+50, frogOriginY-30) 
+curveVertex (frogOriginX+60, frogOriginY-20) 
+curveVertex (frogOriginX+40, frogOriginY)
+curveVertex (frogOriginX+20, frogOriginY+20)
 endShape ();
 
 pop ();
@@ -260,18 +281,18 @@ push ();
 if (drawCheese){
 
   rotate (180);
-  translate (-130, -185);
+  translate (-frogOriginX-30, -frogOriginY-85);
 }
 
 scale (-1, 1);
-translate (-200, 0)
+translate (-frogOriginX*2, 0)
 beginShape ();
-curveVertex (110, 100)
-curveVertex (130, 90) 
-curveVertex (150, 70) 
-curveVertex (160, 80) 
-curveVertex (140, 100)
-curveVertex (120, 120)
+  curveVertex (frogOriginX+10, frogOriginY)
+  curveVertex (frogOriginX+30, frogOriginY-10) 
+  curveVertex (frogOriginX+50, frogOriginY-30) 
+  curveVertex (frogOriginX+60, frogOriginY-20) 
+  curveVertex (frogOriginX+40, frogOriginY)
+  curveVertex (frogOriginX+20, frogOriginY+20)
 endShape ();
 
 pop();
@@ -284,26 +305,26 @@ fill (frogColour) //frog colour
 
 //right foot
 beginShape ();
-curveVertex (125, 130);
-curveVertex (130, 135); 
-curveVertex (134, 150); //right toe
-curveVertex (122, 150); //left toe
-curveVertex (115, 140);
-curveVertex (105, 130);
+curveVertex (frogOriginX+25, frogOriginY+30);
+curveVertex (frogOriginX+30, frogOriginY+35); 
+curveVertex (frogOriginX+34, frogOriginY+50); //right toe
+curveVertex (frogOriginX+22, frogOriginY+50); //left toe
+curveVertex (frogOriginX+15, frogOriginY+40);
+curveVertex (frogOriginX+5, frogOriginY+30);
 endShape ();
 
 //left foot
 push ();
 
 scale (-1, 1);
-translate (-200, 0)
+translate (-frogOriginX*2, 0)
 beginShape ();
-curveVertex (125, 130);
-curveVertex (130, 135); 
-curveVertex (134, 150); //right toe
-curveVertex (122, 150); //left toe
-curveVertex (115, 140);
-curveVertex (105, 130);
+curveVertex (frogOriginX+25, frogOriginY+30);
+curveVertex (frogOriginX+30, frogOriginY+35); 
+curveVertex (frogOriginX+34, frogOriginY+50); //right toe
+curveVertex (frogOriginX+22, frogOriginY+50); //left toe
+curveVertex (frogOriginX+15, frogOriginY+40);
+curveVertex (frogOriginX+5, frogOriginY+30);
 endShape ();
 
 pop ();
