@@ -3,10 +3,10 @@
 
 // frog paramiters
 let drawFrog = (true);
-let frogSize = (1);
+let frogSize = (0.9); //change overall frog size
 let frogColour = [116,228,157]; //48, 227, 122 - 116, 228, 157 - 116, 228, 144
 let frogOutlineColour = [73, 172, 103]; 
-let frogOutlineThickness = (1); // -best: 1
+let frogOutlineThickness = (1.5); // -best: 1
 let drawBackline = (true); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
 let frogBacklineColour = [8, 189, 162]; // dark green: 50, 143, 78 //drak turquoise: 8, 189, 162
 let frogBacklineThickness = (10); // to be visible must be bigger than "frogOutlineThickness" -best 5
@@ -22,6 +22,37 @@ let eyeOffsetX = (25); // X distance of eyes from centre  -best 25 -goofy: 15
 let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
+//lilly paramiters
+let drawLilly = (true); //ttoggle wether lillyPad is drawn
+let lillySize = (1); //changes overall lillyPad size
+let lillyColour = [116,228,157]; 
+let lillyBacklineColour = [8, 189, 162];
+let lillyBacklineTthickness = (0); //must be bigger then "lillyOutlineThickness" to be visible
+let lillyOutlineColour = [73, 172, 103];
+let lillyOutlineTthickness = (1.5);
+let lillyWidth = (75); // length across X axis
+let lillyHeight = (50); // length across Y axis
+let lillyCutSize = (30); //size of the "cut" in lillypad (in degrees) -best: 30
+
+  //lillyPad 1 (top left)
+let lilly1X = (39.5); // x postion of lillyPad 1
+let lilly1Y = (27); // y postion of lillyPad 1
+let lilly1Cut = (55); //changes place of "cut" in lillyPad 1
+  //lillyPad 1 (top right)
+let lilly2X = (160.5); // x postion of lillyPad 2
+let lilly2Y = (27); // y postion of lillyPad 2
+let lilly2Cut = (155); //changes place of "cut" in lillyPad 2
+  //lillyPad 1 (bottom left)
+let lilly3X = (39.5); // x postion of lillyPad 3
+let lilly3Y = (173); // y postion of lillyPad 3
+let lilly3Cut = (325); //changes place of "cut" in lillyPad 3
+  //lillyPad 1 (bottom right)
+let lilly4X = (160.5); // x postion of lillyPad 4
+let lilly4Y = (173); // y postion of lillyPad 4
+let lilly4Cut = (235); //changes place of "cut" in lillyPad 4
+
+
+
 //added if statements:
   //if (eyepupilSize > 20) //creates eye sparkle
   //if (UwU) //changes mouth from :3 to :)
@@ -32,7 +63,7 @@ let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
 //cheese paramiters
-let drawCheese = (true);
+let drawCheese = (false);
 let cheeseColour = [237, 206, 52]; // og colour: 237, 206, 52
 let holeSize = (30); // og 30
 let holeColour = [237, 197, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154
@@ -50,12 +81,12 @@ function setup_wallpaper(pWallpaper) {
   //pWallpaper.output_mode(GRID_WALLPAPER);
   
   pWallpaper.resolution(FIT_TO_SCREEN);
-  pWallpaper.show_guide(true); //set this to false when you're ready to print
+  pWallpaper.show_guide(false); //set this to false when you're ready to print
 
   //Grid settings
   pWallpaper.grid_settings.cell_width  = 200;
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.row_offset  = 0; //nice: 100
 }
 
 function wallpaper_background() {
@@ -72,14 +103,28 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     frog ();
   }
   
+
+  if (drawLilly){
+    lilly (lilly1X, lilly1Y,lilly1Cut); //draws lillyPad #1
+    lilly (lilly2X, lilly2Y,lilly2Cut); //draws lillyPad #2
+    lilly (lilly3X, lilly3Y,lilly3Cut); //draws lillyPad #1
+    lilly (lilly4X, lilly4Y,lilly4Cut); //draws lillyPad #2
+  }
+
+
   if (drawCheese){
     cheese ();
   }
   
+
+
 }
 
 
 function frog (){
+
+  push ();
+
 
   // changes frog size and keeps it at "frogOrigin Position"
   scale (frogSize);
@@ -343,11 +388,35 @@ pop ();
 
 // pop ();
 
-
+pop ();
 
 }
 
 
+
+function lilly (lillyX, lillyY,lillyCut){
+ 
+  push ();
+
+  // changes lillyPad size and keeps it at Original lillyPad postition (aka lilly#X, lilly#Y)
+  scale (lillySize);
+  translate (-(lillyX-(lillyX/lillySize)), -(lillyY-(lillyY/lillySize)));
+  
+  //bacline
+  stroke (lillyBacklineColour);
+  strokeWeight (lillyBacklineTthickness);
+  arc (lillyX, lillyY, lillyWidth, lillyHeight, lillyCut, lillyCut+(360-lillyCutSize), PIE);
+
+  //main shape
+  stroke (lillyOutlineColour);
+  strokeWeight (lillyOutlineTthickness);
+  fill (lillyColour);
+  arc (lillyX, lillyY, lillyWidth, lillyHeight, lillyCut, lillyCut+(360-lillyCutSize), PIE);
+  //beginShape (lillyX, lillyY);
+
+
+  pop ();
+}
 
 function cheese (){ 
    
