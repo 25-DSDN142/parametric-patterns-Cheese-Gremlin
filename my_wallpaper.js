@@ -3,7 +3,7 @@
 
 // frog paramiters
 let drawFrog = (true);
-let frogSize = (2);
+let frogSize = (1);
 let frogColour = [116,228,157]; //48, 227, 122 - 116, 228, 157 - 116, 228, 144
 let frogOutlineColour = [73, 172, 103]; 
 let frogOutlineThickness = (1); // -best: 1
@@ -32,7 +32,7 @@ let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
 //cheese paramiters
-let drawCheese = (false);
+let drawCheese = (true);
 let cheeseColour = [237, 206, 52]; // og colour: 237, 206, 52
 let holeSize = (30); // og 30
 let holeColour = [237, 197, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154
@@ -81,10 +81,10 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 
 function frog (){
 
-
+  // changes frog size and keeps it at "frogOrigin Position"
   scale (frogSize);
-  translate (-frogOriginX/frogSize, -frogOriginY/frogSize);
-  //translate (frogSize/-frogOriginX, frogSize/-frogOriginY);
+  translate (-(frogOriginX-(frogOriginX/frogSize)), -(frogOriginY-(frogOriginY/frogSize)));
+  
 
 
   //backline
@@ -211,14 +211,14 @@ if (drawBackline){
   // noFill ();
   // arc (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize, eyelidSize, 142, 337); //eyelid outlide
   strokeWeight (0);
-  fill (frogColour) //frog colour
+  fill (frogColour); //frog colour
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize-frogOutlineThickness); //eyelid
   fill (255); //white
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyeSize); // white eye part
   fill (0); //black
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyepupilSize); // pupil
   //right eye
-  fill (frogColour) //frog colour
+  fill (frogColour); //frog colour
   ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize-frogOutlineThickness); //eyelid
   fill (255); //white
   ellipse (frogOriginX+eyeOffsetX, frogOriginY-eyeOffsetY, eyeSize); // white eye part
@@ -257,7 +257,7 @@ if (drawBackline){
 //hands
 strokeWeight (frogOutlineThickness);
 stroke (frogOutlineColour);
-fill (frogColour) //frog colour
+fill (frogColour); //frog colour
 
 push();
 //right hand
@@ -266,12 +266,12 @@ if (drawCheese){
   translate (-frogOriginX-175, -frogOriginY-85);
 }
 beginShape ();
-curveVertex (frogOriginX+10, frogOriginY)
-curveVertex (frogOriginX+30, frogOriginY-10) 
-curveVertex (frogOriginX+50, frogOriginY-30) 
-curveVertex (frogOriginX+60, frogOriginY-20) 
-curveVertex (frogOriginX+40, frogOriginY)
-curveVertex (frogOriginX+20, frogOriginY+20)
+curveVertex (frogOriginX+10, frogOriginY);
+curveVertex (frogOriginX+30, frogOriginY-10);
+curveVertex (frogOriginX+50, frogOriginY-30); 
+curveVertex (frogOriginX+60, frogOriginY-20); 
+curveVertex (frogOriginX+40, frogOriginY);
+curveVertex (frogOriginX+20, frogOriginY+20);
 endShape ();
 
 pop ();
@@ -285,14 +285,14 @@ if (drawCheese){
 }
 
 scale (-1, 1);
-translate (-frogOriginX*2, 0)
+translate (-frogOriginX*2, 0);
 beginShape ();
-  curveVertex (frogOriginX+10, frogOriginY)
-  curveVertex (frogOriginX+30, frogOriginY-10) 
-  curveVertex (frogOriginX+50, frogOriginY-30) 
-  curveVertex (frogOriginX+60, frogOriginY-20) 
-  curveVertex (frogOriginX+40, frogOriginY)
-  curveVertex (frogOriginX+20, frogOriginY+20)
+  curveVertex (frogOriginX+10, frogOriginY);
+  curveVertex (frogOriginX+30, frogOriginY-10); 
+  curveVertex (frogOriginX+50, frogOriginY-30); 
+  curveVertex (frogOriginX+60, frogOriginY-20); 
+  curveVertex (frogOriginX+40, frogOriginY);
+  curveVertex (frogOriginX+20, frogOriginY+20);
 endShape ();
 
 pop();
@@ -301,7 +301,7 @@ pop();
 //feet
 strokeWeight (frogOutlineThickness);
 stroke (frogOutlineColour);
-fill (frogColour) //frog colour
+fill (frogColour); //frog colour
 
 //right foot
 beginShape ();
@@ -317,7 +317,7 @@ endShape ();
 push ();
 
 scale (-1, 1);
-translate (-frogOriginX*2, 0)
+translate (-frogOriginX*2, 0);
 beginShape ();
 curveVertex (frogOriginX+25, frogOriginY+30);
 curveVertex (frogOriginX+30, frogOriginY+35); 
@@ -355,7 +355,7 @@ function cheese (){
 
   if (drawFrog){ //makes frog hold cheese
 
-    translate (frogOriginX-16 ,frogOriginY)
+    translate (frogOriginX-16 ,frogOriginY);
     scale (0.25);
   }
   else {
@@ -422,10 +422,10 @@ function cheese (){
 
 
 //shows coords of mouse for easy coord finding
-function coords () {
+function coords (){
   stroke (0);
   strokeWeight (1);
-  fill (28, 145, 156)
+  fill (28, 145, 156);
   text("x pos is " + mouseX, 25, 25); // displays text, including a P5.js variable which tracks the mouse position
   text("y pos is " + mouseY, 100, 25);
 
