@@ -29,29 +29,51 @@ let lillyColour = [116,228,157];
 let lillyBacklineColour = [8, 189, 162];
 let lillyBacklineTthickness = (0); //must be bigger then "lillyOutlineThickness" to be visible
 let lillyOutlineColour = [73, 172, 103];
-let lillyOutlineTthickness = (1.5);
-let lillyWidth = (75); // length across X axis
-let lillyHeight = (50); // length across Y axis
+let lillyOutlineTthickness = (1.5); // -best: 1.5
+let lillyWidth = (75); // length across X axis -best: 75
+let lillyHeight = (50); // length across Y axis -best: 50
 let lillyCutSize = (30); //size of the "cut" in lillypad (in degrees) -best: 30
 
   //lillyPad 1 (top left)
-let lilly1X = (39.5); // x postion of lillyPad 1
-let lilly1Y = (27); // y postion of lillyPad 1
-let lilly1Cut = (55); //changes place of "cut" in lillyPad 1
+let lilly1X = (39.5); // x postion of lillyPad 1 -best: 39.5
+let lilly1Y = (27); // y postion of lillyPad 1 -best: 27
+let lilly1Cut = (55); //changes place of "cut" in lillyPad 1 -best: 55
   //lillyPad 1 (top right)
-let lilly2X = (160.5); // x postion of lillyPad 2
-let lilly2Y = (27); // y postion of lillyPad 2
-let lilly2Cut = (155); //changes place of "cut" in lillyPad 2
+let lilly2X = (160.5); // x postion of lillyPad 2 -best: 160.5
+let lilly2Y = (27); // y postion of lillyPad 2 -best: 27
+let lilly2Cut = (155); //changes place of "cut" in lillyPad 2 -best: 155
   //lillyPad 1 (bottom left)
-let lilly3X = (39.5); // x postion of lillyPad 3
-let lilly3Y = (173); // y postion of lillyPad 3
-let lilly3Cut = (325); //changes place of "cut" in lillyPad 3
+let lilly3X = (39.5); // x postion of lillyPad 3 -best: 39.5
+let lilly3Y = (173); // y postion of lillyPad 3 -best: 173
+let lilly3Cut = (325); //changes place of "cut" in lillyPad 3 -best: 325
   //lillyPad 1 (bottom right)
-let lilly4X = (160.5); // x postion of lillyPad 4
-let lilly4Y = (173); // y postion of lillyPad 4
-let lilly4Cut = (235); //changes place of "cut" in lillyPad 4
+let lilly4X = (160.5); // x postion of lillyPad 4 -best: 160.5
+let lilly4Y = (173); // y postion of lillyPad 4 -best: 173
+let lilly4Cut = (235); //changes place of "cut" in lillyPad 4 -best: 235
 
 
+//flower
+let drawFlower = (true);
+let flowerSize = (1.5); //changes size of flower
+let flowerCentreColour = [235, 225, 52]; //235, 225, 52
+let flowerCentreOutlineColour = [240, 193, 53]; //235, 214, 52 //232, 202, 51
+let flowerCentreOutlineThickness = (1);
+let flowerCentreWidth = (15);
+let flowerCentreHeight = (15);
+
+let flowerPetalColour = [237, 88, 217]; //211, 52, 235
+let flowerPetalOutlineColour = [212, 74, 205]; //180, 52, 235
+let flowerPetalOutlineThickness = (1);
+let flowerPetalLength = (20); //usually labled width (for 1st petal)
+let flowerPetalWidth = (10); //usually labled height (for 1st petal)
+let flowePetalOffset = (7.5);
+
+
+let flower1X = (0);
+let flower1Y = (0);
+
+let flower2X = (0);
+let flower2Y = (200);
 
 //added if statements:
   //if (eyepupilSize > 20) //creates eye sparkle
@@ -109,6 +131,12 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     lilly (lilly2X, lilly2Y,lilly2Cut); //draws lillyPad #2
     lilly (lilly3X, lilly3Y,lilly3Cut); //draws lillyPad #1
     lilly (lilly4X, lilly4Y,lilly4Cut); //draws lillyPad #2
+  }
+
+  if (drawFlower){
+    flower (flower1X, flower1Y);
+    flower (flower2X, flower2Y);
+
   }
 
 
@@ -417,6 +445,42 @@ function lilly (lillyX, lillyY,lillyCut){
 
   pop ();
 }
+
+
+function flower (flowerX, flowerY){
+
+  push ();
+
+  // changes flower size and keeps it at Original flower postition (aka flower#X, flower#Y)
+  scale (flowerSize);
+  translate (-(flowerX-(flowerX/flowerSize)), -(flowerY-(flowerY/flowerSize)));
+
+  //petals
+  fill (flowerPetalColour);
+  stroke (flowerPetalOutlineColour);
+  strokeWeight (flowerPetalOutlineThickness);
+  ellipse (flowerX-flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
+  ellipse (flowerX+flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
+  ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  push ();
+  rotate (45);
+  ellipse (flowerX-flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
+  ellipse (flowerX+flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
+  ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  pop ();
+
+  //flower centre
+  fill (flowerCentreColour);
+  stroke (flowerCentreOutlineColour);
+  strokeWeight (flowerCentreOutlineThickness);
+  ellipse (flowerX, flowerY, flowerCentreWidth, flowerCentreHeight);
+
+
+  pop ();
+}
+
 
 function cheese (){ 
    
