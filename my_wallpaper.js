@@ -1,5 +1,19 @@
 //your parameter variables go here!
 
+//water paramiters
+  //water 1
+let draw1Water = (true);//water leyer 1
+let water1Colour = [37, 207, 245]; //9, 197, 222
+let water1Thickness = (5); //stroke thickness of water layer 1 line
+  //water 2
+let draw2Water = (true); //togglre drawing water layer 2
+let water2Colour = [9, 183, 222];
+let water2Thickness = (5); //stroke thickness of water layer 2 line
+  //watrer offset
+let waterOffsetX = (250); //X offset between water layer 1 and water layer 2
+let waterOffsetY = (0); //Y offset between water layer 1 and water layer 2
+let waterRotation = (90); //rotation difference between water layer 1 and water layer 2
+
 
 // frog paramiters
 let drawFrog = (true);
@@ -23,7 +37,7 @@ let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
 //lilly paramiters
-let drawLilly = (true); //ttoggle wether lillyPad is drawn
+let drawLilly = (false); //toggle wether lillyPad is drawn
 let lillySize = (1); //changes overall lillyPad size
 let lillyColour = [116,228,157]; 
 let lillyBacklineColour = [8, 189, 162];
@@ -33,7 +47,6 @@ let lillyOutlineTthickness = (1.5); // -best: 1.5
 let lillyWidth = (75); // length across X axis -best: 75
 let lillyHeight = (50); // length across Y axis -best: 50
 let lillyCutSize = (30); //size of the "cut" in lillypad (in degrees) -best: 30
-
   //lillyPad 1 (top left)
 let lilly1X = (39.5); // x postion of lillyPad 1 -best: 39.5
 let lilly1Y = (27); // y postion of lillyPad 1 -best: 27
@@ -52,36 +65,31 @@ let lilly4Y = (173); // y postion of lillyPad 4 -best: 173
 let lilly4Cut = (235); //changes place of "cut" in lillyPad 4 -best: 235
 
 
-//flower
-let drawFlower = (true);
+//flower paramiters
+  //flower centre
+let drawFlower = (false);
 let flowerSize = (1.5); //changes size of flower
 let flowerCentreColour = [235, 225, 52]; //235, 225, 52
 let flowerCentreOutlineColour = [240, 193, 53]; //235, 214, 52 //232, 202, 51
 let flowerCentreOutlineThickness = (1);
 let flowerCentreWidth = (15);
 let flowerCentreHeight = (15);
-
+  //flower petals
 let flowerPetalColour = [237, 88, 217]; //211, 52, 235
 let flowerPetalOutlineColour = [212, 74, 205]; //180, 52, 235
 let flowerPetalOutlineThickness = (1);
 let flowerPetalLength = (20); //usually labled width (for 1st petal)
 let flowerPetalWidth = (10); //usually labled height (for 1st petal)
 let flowePetalOffset = (7.5);
-
-
+  //flower 1
 let flower1X = (0);
 let flower1Y = (0);
-
+  //flower 2
 let flower2X = (0);
 let flower2Y = (200);
-
-//added if statements:
-  //if (eyepupilSize > 20) //creates eye sparkle
-  //if (UwU) //changes mouth from :3 to :)
-  //if (drawFrog) //changes things in cheese function if frog is active (frog holds cheese)
-  //if (drawBackline) //draws backline
-  //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
-
+  //flower 3
+let flower3X = (200);
+let flower3Y = (0);
 
 
 //cheese paramiters
@@ -98,9 +106,19 @@ let cheeseTransX = (27); //move cheese X axis (og left corner 0,0) -best 27
 let cheeseTransY = (75); //move cheese y axis (og left corner 0,0) -best 75
 
 
+//added if statements:
+  //if (eyepupilSize > 20) //creates eye sparkle
+  //if (UwU) //changes mouth from :3 to :)
+  //if (drawFrog) //changes things in cheese function if frog is active (frog holds cheese)
+  //if (drawBackline) //draws backline
+  //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
+
+//---Only Paramiters Above-----------
+
+
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
-  //pWallpaper.output_mode(GRID_WALLPAPER);
+  //pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
@@ -112,13 +130,26 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background(3, 252, 215); 
+  background(3, 232, 252); //3, 252, 215
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
   angleMode(DEGREES);
   //coords ();
   //grid();
+
+  if (draw1Water){
+    water (water1Colour);
+    
+  }
+
+  if (draw2Water){
+      push ();
+      translate (waterOffsetX, waterOffsetY);
+      rotate (waterRotation);
+      water (water2Colour);
+      pop ();
+    }
 
 
   if (drawFrog){
@@ -136,6 +167,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   if (drawFlower){
     flower (flower1X, flower1Y);
     flower (flower2X, flower2Y);
+    //flower (flower3X, flower3Y);
 
   }
 
@@ -146,6 +178,148 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   
 
 
+}
+
+
+function water (waterColour){
+  
+
+  push();
+  translate (200, 200)
+  rotate (180);
+  //^moving where water is drawn due to overallping issue when tilling 
+
+  noFill ();
+  stroke (waterColour);
+  strokeWeight (water1Thickness);
+
+  beginShape ();
+  curveVertex (75, -30);
+  curveVertex (30, -30); 
+  curveVertex (30, 0); //connection
+  curveVertex (25, 30);
+  curveVertex (50, 40);
+  curveVertex (75, 0); 
+  curveVertex (75, -30); //connection
+  curveVertex (30, -30);
+  curveVertex (30, 0);
+  endShape ();
+
+  beginShape ();
+  curveVertex (60, 40);
+  curveVertex (75, 0);
+  curveVertex (85, -10);
+  curveVertex (110, -20);
+  curveVertex (140, 0); 
+  curveVertex (120, 50); 
+  curveVertex (80, 70);
+  curveVertex (60, 40);
+  curveVertex (75, 0); 
+  curveVertex (80, -10); 
+  endShape ();
+
+  beginShape ();
+  curveVertex (40, 42); //bottom of 1st loop
+  curveVertex (67, 60);
+  curveVertex (70, 80);
+  curveVertex (45, 87);
+  curveVertex (20, 75);
+  curveVertex (-10, 75);
+  curveVertex (-25, 60);
+  curveVertex (-27, 40);
+  curveVertex (0, 20);
+  curveVertex (25, 32);
+  curveVertex (40, 43);
+  curveVertex (67, 60);
+  curveVertex (70, 80);
+  endShape ();
+
+  beginShape ();
+  curveVertex (120, 50);
+  curveVertex (125, 75);
+  curveVertex (150, 85);
+  curveVertex (170, 80);
+  curveVertex (174, 60);
+  curveVertex (171, 48);
+  curveVertex (176, 35);
+  curveVertex (183, 28);
+  curveVertex (170, 15);
+  curveVertex (155, 15);
+  curveVertex (140, 20);
+  curveVertex (120, 50);
+  curveVertex (125, 75);
+  curveVertex (150, 85);
+  endShape ();
+  //bottom right corner
+  beginShape ();
+  curveVertex (-30, 15);
+  curveVertex (5, 18);
+  curveVertex (20, 5);
+  curveVertex (25, -23); //touching first loop
+  curveVertex (0, -40);
+  curveVertex (-40, -30);
+  curveVertex (-60, -20);
+  curveVertex (-60, 0);
+  curveVertex (-30, 15);
+  curveVertex (5, 18);
+  curveVertex (20, 5);
+  curveVertex (25, -23);
+  endShape ();
+  //furthest left
+  beginShape ();
+  curveVertex (0, 79); //top
+  curveVertex (30, 81);
+  curveVertex (45, 100);
+  curveVertex (60, 130);
+  curveVertex (50, 165);
+  curveVertex (0, 158); //bottom
+  curveVertex (-20, 120);
+  curveVertex (0, 79);
+  curveVertex (30, 81);
+  curveVertex (40, 100);
+  endShape ();
+
+  beginShape ();
+  curveVertex (70, 80);
+  curveVertex (100, 70);
+  curveVertex (135, 82);
+  curveVertex (132, 105);
+  curveVertex (110, 120);
+  curveVertex (65, 125);
+  curveVertex (50, 102);
+  curveVertex (70, 80);
+  curveVertex (100, 70);
+  curveVertex (135, 82);
+  endShape ();
+
+  beginShape ();
+  curveVertex (110, 180);
+  curveVertex (75, 169);
+  curveVertex (75, 140);
+  curveVertex (90, 125);
+  curveVertex (110, 123);
+  curveVertex (130, 150);
+  curveVertex (125, 170);
+  curveVertex (110, 180);
+  curveVertex (75, 169);
+  curveVertex (92, 125);
+  endShape ();
+
+  beginShape ();
+  curveVertex (132, 110);
+  curveVertex (150, 88);
+  curveVertex (172, 84);
+  curveVertex (183, 98);
+  curveVertex (179, 125);
+  curveVertex (170, 163);
+  curveVertex (140, 172);
+  curveVertex (130, 150);
+  curveVertex (132, 110);
+  curveVertex (150, 88);
+  curveVertex (172, 84);
+  endShape ();
+
+  pop ();
 }
 
 
@@ -421,7 +595,6 @@ pop ();
 }
 
 
-
 function lilly (lillyX, lillyY,lillyCut){
  
   push ();
@@ -464,12 +637,14 @@ function flower (flowerX, flowerY){
   ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength);
   ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength);
   push ();
+  translate (flowerX, flowerY);
   rotate (45);
-  ellipse (flowerX-flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
-  ellipse (flowerX+flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
-  ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength);
-  ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  ellipse (-flowePetalOffset, 0, flowerPetalLength, flowerPetalWidth);
+  ellipse (+flowePetalOffset, 0, flowerPetalLength, flowerPetalWidth);
+  ellipse (0, -flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+  ellipse (0, flowePetalOffset, flowerPetalWidth, flowerPetalLength);
   pop ();
+  
 
   //flower centre
   fill (flowerCentreColour);
