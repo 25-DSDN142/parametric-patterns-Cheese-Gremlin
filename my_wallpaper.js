@@ -1,16 +1,16 @@
 //your parameter variables go here!
 
 //water paramiters
-  //water 1
-let draw1Water = (true);//water leyer 1
-let water1Colour = [37, 207, 245]; //9, 197, 222
+  //water 1 (darker)
+let draw1Water = (false);//water leyer 1
+let water1Colour = [46, 186, 193]; //9, 197, 222 //37, 207, 245 //light varient: 56, 197, 200 //dark varient: 46, 186, 193
 let water1Thickness = (5); //stroke thickness of water layer 1 line
-  //water 2
-let draw2Water = (true); //togglre drawing water layer 2
-let water2Colour = [9, 183, 222];
+  //water 2 (lighter)
+let draw2Water = (false); //togglre drawing water layer 2
+let water2Colour = [73, 224, 228]; //9, 183, 222 //light varient: 131, 245, 245 //dark varient: 73, 224, 228
 let water2Thickness = (5); //stroke thickness of water layer 2 line
-  //watrer offset
-let waterOffsetX = (250); //X offset between water layer 1 and water layer 2
+  //water offset
+let waterOffsetX = (275); //X offset between water layer 1 and water layer 2
 let waterOffsetY = (0); //Y offset between water layer 1 and water layer 2
 let waterRotation = (90); //rotation difference between water layer 1 and water layer 2
 
@@ -18,10 +18,10 @@ let waterRotation = (90); //rotation difference between water layer 1 and water 
 // frog paramiters
 let drawFrog = (true);
 let frogSize = (0.9); //change overall frog size
-let frogColour = [116,228,157]; //48, 227, 122 - 116, 228, 157 - 116, 228, 144
-let frogOutlineColour = [73, 172, 103]; 
-let frogOutlineThickness = (1.5); // -best: 1
-let drawBackline = (true); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
+let frogColour = [116, 228, 157]; //48, 227, 122 - 116, 228, 144 -best: 116, 228, 157
+let frogOutlineColour = [73, 172, 103]; //nice green: 73, 172, 103
+let frogOutlineThickness = (1); // -best: 1
+let drawBackline = (false); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
 let frogBacklineColour = [8, 189, 162]; // dark green: 50, 143, 78 //drak turquoise: 8, 189, 162
 let frogBacklineThickness = (10); // to be visible must be bigger than "frogOutlineThickness" -best 5
 let frogOriginX = (100); // Xpos of frog centre
@@ -29,7 +29,7 @@ let frogOriginY = (100); // Ypos of frog centre
 let frogWidth = (100); //width of frog body
 let mouthHeight = (-30);// is added to frogOriginY (more negative=higher and more postive=lower) -best -30
 let UwU = (false); //changes mouth shape
-let eyeSize = (25); //size of white eye part -min 20 or else goofy  -sparkle: >25
+let eyeSize = (26); //size of white eye part -min 20 or else goofy  -sparkle: >25
 let eyelidSize = (eyeSize+5); //size of green circle around eyes (change number to chang difference/space between eyeLid and eye (white part)) -best:5
 let eyepupilSize = (eyeSize-5); //size of pupil -best: 5 smaller than eyeSize -for sparkle: total>20 -scared: make 15smaller than eyeSize
 let eyeOffsetX = (25); // X distance of eyes from centre  -best 25 -goofy: 15
@@ -37,7 +37,7 @@ let eyeOffsetY = (43); // Y distance aka height of eyes from centre  -best: 43
 
 
 //lilly paramiters
-let drawLilly = (false); //toggle wether lillyPad is drawn
+let drawLilly = (true); //toggle wether lillyPad is drawn
 let lillySize = (1); //changes overall lillyPad size
 let lillyColour = [116,228,157]; 
 let lillyBacklineColour = [8, 189, 162];
@@ -51,15 +51,15 @@ let lillyCutSize = (30); //size of the "cut" in lillypad (in degrees) -best: 30
 let lilly1X = (39.5); // x postion of lillyPad 1 -best: 39.5
 let lilly1Y = (27); // y postion of lillyPad 1 -best: 27
 let lilly1Cut = (55); //changes place of "cut" in lillyPad 1 -best: 55
-  //lillyPad 1 (top right)
+  //lillyPad 2 (top right)
 let lilly2X = (160.5); // x postion of lillyPad 2 -best: 160.5
 let lilly2Y = (27); // y postion of lillyPad 2 -best: 27
 let lilly2Cut = (155); //changes place of "cut" in lillyPad 2 -best: 155
-  //lillyPad 1 (bottom left)
+  //lillyPad 3 (bottom left)
 let lilly3X = (39.5); // x postion of lillyPad 3 -best: 39.5
 let lilly3Y = (173); // y postion of lillyPad 3 -best: 173
 let lilly3Cut = (325); //changes place of "cut" in lillyPad 3 -best: 325
-  //lillyPad 1 (bottom right)
+  //lillyPad 4 (bottom right)
 let lilly4X = (160.5); // x postion of lillyPad 4 -best: 160.5
 let lilly4Y = (173); // y postion of lillyPad 4 -best: 173
 let lilly4Cut = (235); //changes place of "cut" in lillyPad 4 -best: 235
@@ -81,15 +81,34 @@ let flowerPetalOutlineThickness = (1);
 let flowerPetalLength = (20); //usually labled width (for 1st petal)
 let flowerPetalWidth = (10); //usually labled height (for 1st petal)
 let flowePetalOffset = (7.5);
+let flowerPetal2Colour = [245, 135, 230]; //lighter pink
+
+let CoolFlowerPetal = (false); //currently broken
+let layerdFlowerPetal = (true);
+    //middle layer
+let middleFlowerPetal = (true);
+let flowerPetal3Colour = [245, 162, 233]; //245, 154, 232
+let flowerPetal4Colour = [245, 198, 238];
+    //back layer
+let backFlowerPetal = (true);
+let flowerPetal5Colour = [247, 215, 243];
+let flowerPetal6Colour = [247, 228, 245];
   //flower 1
+let drawFlower1 = (true);
 let flower1X = (0);
 let flower1Y = (0);
   //flower 2
+let drawFlower2 = (true);
 let flower2X = (0);
 let flower2Y = (200);
   //flower 3
+let drawFlower3 = (true);
 let flower3X = (200);
 let flower3Y = (0);
+  //flower 4
+let drawFlower4 = (true);
+let flower4X = (200);
+let flower4Y = (200);
 
 
 //cheese paramiters
@@ -112,13 +131,15 @@ let cheeseTransY = (75); //move cheese y axis (og left corner 0,0) -best 75
   //if (drawFrog) //changes things in cheese function if frog is active (frog holds cheese)
   //if (drawBackline) //draws backline
   //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
+  //if (layerdFlowerPetal) which contains if (backFlowerPetal) and if (middleFlowerPetal) //changes how many "petal layers" flowers have
 
 //---Only Paramiters Above-----------
 
 
 function setup_wallpaper(pWallpaper) {
-  //pWallpaper.output_mode(DEVELOP_GLYPH);
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
+  //pWallpaper.output_mode(GRID_WALLPAPER); 
+  //pWallpaper.output_mode(GLIDE_WALLPAPER); 
   
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
@@ -126,11 +147,11 @@ function setup_wallpaper(pWallpaper) {
   //Grid settings
   pWallpaper.grid_settings.cell_width  = 200;
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 0; //nice: 100
+  pWallpaper.grid_settings.row_offset  = 100; //nice: 100
 }
 
 function wallpaper_background() {
-  background(3, 232, 252); //3, 252, 215
+  background(3, 252, 215); //3, 252, 215 //3, 232, 252 //light water background: 95, 214, 212 //dark water background: 60, 196, 201
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
@@ -165,9 +186,19 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   }
 
   if (drawFlower){
+
+    if (drawFlower1){
     flower (flower1X, flower1Y);
+    }
+    if (drawFlower2){
     flower (flower2X, flower2Y);
-    //flower (flower3X, flower3Y);
+    }
+    if (drawFlower3){
+    flower (flower3X, flower3Y);
+    }
+    if (drawFlower4){
+    flower (flower4X, flower4Y);
+    }
 
   }
 
@@ -580,8 +611,6 @@ pop ();
 
 
 
-
-
 // //funny stuff happens
 // push ();
 
@@ -629,15 +658,95 @@ function flower (flowerX, flowerY){
   translate (-(flowerX-(flowerX/flowerSize)), -(flowerY-(flowerY/flowerSize)));
 
   //petals
+
   fill (flowerPetalColour);
   stroke (flowerPetalOutlineColour);
   strokeWeight (flowerPetalOutlineThickness);
-  ellipse (flowerX-flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
-  ellipse (flowerX+flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth);
-  ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength);
-  ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength);
+
+  if (layerdFlowerPetal){
+
+      //back flower petals
+    if (backFlowerPetal){
+      //flower petals #5
+      push ();
+      fill (flowerPetal5Colour);
+      ellipse (flowerX-flowePetalOffset-(flowerPetalLength/4), flowerY, flowerPetalLength, flowerPetalWidth);
+      ellipse (flowerX+flowePetalOffset+(flowerPetalLength/4), flowerY, flowerPetalLength, flowerPetalWidth);
+      ellipse (flowerX, flowerY-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      ellipse (flowerX, flowerY+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      push ();
+      //flower petals #6
+      translate (flowerX, flowerY);
+      rotate (45);
+      fill (flowerPetal6Colour);
+      ellipse (0-flowePetalOffset-(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0+flowePetalOffset+(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0, 0-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      ellipse (0, 0+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      pop ();
+      pop ();
+
+    }
+    
+
+      //middle flower petals
+    if (middleFlowerPetal){
+      //flower petals #3
+      push ();
+      translate (flowerX, flowerY);
+      fill (flowerPetal3Colour);
+      rotate (22.5);
+      ellipse (0-flowePetalOffset-(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0+flowePetalOffset+(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0, 0-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      ellipse (0, 0+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      push ();
+      //flower petals #4
+      rotate (45);
+      fill (flowerPetal4Colour);
+      ellipse (0-flowePetalOffset-(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0+flowePetalOffset+(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+      ellipse (0, 0-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      ellipse (0, 0+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+      pop ();
+      pop ();
+
+    }
+  }
+  
+    //cool flower (accidentally created. check progress Doc) <- doesnt work currently
+  if (CoolFlowerPetal){
+    //push ();
+    translate (flowerX, flowerY);
+    fill (flowerPetal3Colour);
+    rotate (22.5);
+    ellipse (0-flowePetalOffset-(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+    ellipse (0+flowePetalOffset+(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+    ellipse (0, 0-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+    ellipse (0, 0+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+    push ();
+    translate (flowerX, flowerY);
+    rotate (45);
+    fill (flowerPetal4Colour);
+    ellipse (0-flowePetalOffset-(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+    ellipse (0+flowePetalOffset+(flowerPetalLength/4), 0, flowerPetalLength, flowerPetalWidth);
+    ellipse (0, 0-flowePetalOffset-(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+    ellipse (0, 0+flowePetalOffset+(flowerPetalLength/4), flowerPetalWidth, flowerPetalLength);
+    pop ();
+    
+  }
+
+
+  // front flower petals
+    //flower petals #1
+  ellipse (flowerX-flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth); //left petal
+  ellipse (flowerX+flowePetalOffset, flowerY, flowerPetalLength, flowerPetalWidth); //right petal
+  ellipse (flowerX, flowerY-flowePetalOffset, flowerPetalWidth, flowerPetalLength); //top petal
+  ellipse (flowerX, flowerY+flowePetalOffset, flowerPetalWidth, flowerPetalLength); //bottom petal
   push ();
+    //flower petals #2
   translate (flowerX, flowerY);
+  fill (flowerPetal2Colour);
   rotate (45);
   ellipse (-flowePetalOffset, 0, flowerPetalLength, flowerPetalWidth);
   ellipse (+flowePetalOffset, 0, flowerPetalLength, flowerPetalWidth);
@@ -645,6 +754,9 @@ function flower (flowerX, flowerY){
   ellipse (0, flowePetalOffset, flowerPetalWidth, flowerPetalLength);
   pop ();
   
+
+
+
 
   //flower centre
   fill (flowerCentreColour);
