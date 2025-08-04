@@ -2,11 +2,11 @@
 
 //water paramiters
   //water 1 (darker)
-let draw1Water = (false);//water leyer 1
+let draw1Water = (true);//water leyer 1
 let water1Colour = [46, 186, 193]; //9, 197, 222 //37, 207, 245 //light varient: 56, 197, 200 //dark varient: 46, 186, 193
 let water1Thickness = (5); //stroke thickness of water layer 1 line
   //water 2 (lighter)
-let draw2Water = (false); //togglre drawing water layer 2
+let draw2Water = (true); //togglre drawing water layer 2
 let water2Colour = [73, 224, 228]; //9, 183, 222 //light varient: 131, 245, 245 //dark varient: 73, 224, 228
 let water2Thickness = (5); //stroke thickness of water layer 2 line
   //water offset
@@ -17,7 +17,7 @@ let waterRotation = (90); //rotation difference between water layer 1 and water 
 
 // frog paramiters
 let drawFrog = (true);
-let frogSize = (0.9); //change overall frog size
+let frogSize = (0.88); //change overall frog size
 let frogColour = [116, 228, 157]; //48, 227, 122 - 116, 228, 144 -best: 116, 228, 157
 let frogOutlineColour = [73, 172, 103]; //nice green: 73, 172, 103
 let frogOutlineThickness = (1); // -best: 1
@@ -86,11 +86,11 @@ let flowerPetal2Colour = [245, 135, 230]; //lighter pink
 let CoolFlowerPetal = (false); //currently broken
 let layerdFlowerPetal = (true);
     //middle layer
-let middleFlowerPetal = (false);
+let middleFlowerPetal = (true);
 let flowerPetal3Colour = [245, 162, 233]; //245, 154, 232
 let flowerPetal4Colour = [245, 198, 238];
     //back layer
-let backFlowerPetal = (false);
+let backFlowerPetal = (true);
 let flowerPetal5Colour = [247, 215, 243];
 let flowerPetal6Colour = [247, 228, 245];
   //flower 1
@@ -161,7 +161,7 @@ let drawFrogCheese = (false);
   //if (layerdFlowerPetal) which contains if (backFlowerPetal) and if (middleFlowerPetal) //changes how many "petal layers" flowers have
 
 
-let RowOffset = 100
+let RowOffset = 0
 //---Only Paramiters Above-----------
 
 
@@ -170,7 +170,7 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER); 
   //pWallpaper.output_mode(GLIDE_WALLPAPER); 
   
-  pWallpaper.resolution(FIT_TO_SCREEN);
+  pWallpaper.resolution(A3);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
   //Grid settings
@@ -180,7 +180,7 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background(81, 240, 227); //3, 252, 215 //3, 232, 252 //light water background: 95, 214, 212 //dark water background: 60, 196, 201 //best: 50,204,209 with water //81, 240, 227
+  background(50,204,209); //3, 252, 215 //3, 232, 252 //light water background: 95, 214, 212 //dark water background: 60, 196, 201 //best: 50,204,209 with water //81, 240, 227
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
@@ -189,7 +189,10 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   //grid();
 
   if (draw1Water){
+    push ();
+    translate (100, 0) //stops water overlap
     water (water1Colour);
+    pop ();
     
   }
 
@@ -203,19 +206,26 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 
 
   if (drawFrog){
+    push ();
+    translate (-100, -150) //stops water overlap
     frog ();
+    pop ();
   }
   
 
   if (drawLilly){
+    push ();
+    translate (-100, -150) //stops water overlap
     lilly (lilly1X, lilly1Y,lilly1Cut); //draws lillyPad #1
     lilly (lilly2X, lilly2Y,lilly2Cut); //draws lillyPad #2
     lilly (lilly3X, lilly3Y,lilly3Cut); //draws lillyPad #1
     lilly (lilly4X, lilly4Y,lilly4Cut); //draws lillyPad #2
+    pop ();
   }
 
   if (drawFlower){
-
+  push ();
+  translate (-100, -150) //stops water overlap
     if (drawFlower1){
     flower (flower1X, flower1Y);
     }
@@ -228,11 +238,13 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     if (drawFlower4){
     flower (flower4X, flower4Y);
     }
-
+  pop ();
   }
 
 
   if (drawCheese){
+    push ();
+    translate (-100, -150) //stops water overlap
 
     if (drawFrogCheese){ //makes frog hold cheese
     push();
@@ -260,7 +272,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     cheese (mainCheeseX, mainCheeseY, mainCheeseSize);
     }
 
-
+  pop ();
   }
   
 
@@ -529,21 +541,11 @@ if (drawBackline){
   arc (frogOriginX, frogOriginY+mouthHeight, 20, 20, 45, 115);
 
 
-  // -> :D
-  // strokeWeight (frogOutlineThickness);
-  // stroke (frogOutlineColour); //41, 194, 104
-  // fill (79, 198, 121);
-  // arc (frogOriginX, frogOriginY+mouthHeight, 20, 20, 0, 180, CHORD);
-
   }
 
 
   //eyes
   //left eye
-  
-  // strokeWeight (frogOutlineThickness);
-  // noFill ();
-  // arc (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize, eyelidSize, 142, 337); //eyelid outlide
   strokeWeight (0);
   fill (frogColour); //frog colour
   ellipse (frogOriginX-eyeOffsetX, frogOriginY-eyeOffsetY, eyelidSize-frogOutlineThickness); //eyelid
