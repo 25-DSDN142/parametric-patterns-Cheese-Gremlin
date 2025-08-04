@@ -21,8 +21,8 @@ let frogSize = (0.9); //change overall frog size
 let frogColour = [116, 228, 157]; //48, 227, 122 - 116, 228, 144 -best: 116, 228, 157
 let frogOutlineColour = [73, 172, 103]; //nice green: 73, 172, 103
 let frogOutlineThickness = (1); // -best: 1
-let drawBackline = (false); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
-let frogBacklineColour = [8, 189, 162]; // dark green: 50, 143, 78 //drak turquoise: 8, 189, 162
+let drawBackline = (true); //toggles wether frog has 2nd outline that goes around entire frog (like sticker edge)
+let frogBacklineColour = [50, 143, 78]; // dark green: 50, 143, 78 //drak turquoise: 8, 189, 162 // lighhter tourqiouse 74, 232, 206
 let frogBacklineThickness = (10); // to be visible must be bigger than "frogOutlineThickness" -best 5
 let frogOriginX = (100); // Xpos of frog centre
 let frogOriginY = (100); // Ypos of frog centre
@@ -41,7 +41,7 @@ let drawLilly = (true); //toggle wether lillyPad is drawn
 let lillySize = (1); //changes overall lillyPad size
 let lillyColour = [116,228,157]; 
 let lillyBacklineColour = [8, 189, 162];
-let lillyBacklineTthickness = (0); //must be bigger then "lillyOutlineThickness" to be visible
+let lillyBacklineTthickness = (5); //must be bigger then "lillyOutlineThickness" to be visible
 let lillyOutlineColour = [73, 172, 103];
 let lillyOutlineTthickness = (1.5); // -best: 1.5
 let lillyWidth = (75); // length across X axis -best: 75
@@ -67,7 +67,7 @@ let lilly4Cut = (235); //changes place of "cut" in lillyPad 4 -best: 235
 
 //flower paramiters
   //flower centre
-let drawFlower = (false);
+let drawFlower = (true);
 let flowerSize = (1.5); //changes size of flower
 let flowerCentreColour = [235, 225, 52]; //235, 225, 52
 let flowerCentreOutlineColour = [240, 193, 53]; //235, 214, 52 //232, 202, 51
@@ -86,11 +86,11 @@ let flowerPetal2Colour = [245, 135, 230]; //lighter pink
 let CoolFlowerPetal = (false); //currently broken
 let layerdFlowerPetal = (true);
     //middle layer
-let middleFlowerPetal = (true);
+let middleFlowerPetal = (false);
 let flowerPetal3Colour = [245, 162, 233]; //245, 154, 232
 let flowerPetal4Colour = [245, 198, 238];
     //back layer
-let backFlowerPetal = (true);
+let backFlowerPetal = (false);
 let flowerPetal5Colour = [247, 215, 243];
 let flowerPetal6Colour = [247, 228, 245];
   //flower 1
@@ -115,14 +115,41 @@ let flower4Y = (200);
 let drawCheese = (false);
 let cheeseColour = [237, 206, 52]; // og colour: 237, 206, 52
 let holeSize = (30); // og 30
-let holeColour = [237, 197, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154
+let holeColour = [237, 191, 52] ; // og colour: 237, 197, 52 // mouldy colour 150,170,154 //darker but orangy 237, 191, 52 //235, 191, 35 //235, 197, 26
 let holelineThickness = (2); 
-let cheeseOutlineColour = [237, 191, 52]; // og colour: 237, 191, 52
+let cheeseOutlineColour = [235, 170, 42]; // og colour: 237, 191, 52 // darker 235, 170, 42 //235, 181, 19
 let cheeseOutlineThickness = (2); // og 2
-let cheeseBacklineColour = [227, 178, 32]; //og 0
-let cheeseBacklineThickness = (5); // to be visible must be bigger than "outlineThickness"
-let cheeseTransX = (27); //move cheese X axis (og left corner 0,0) -best 27
-let cheeseTransY = (75); //move cheese y axis (og left corner 0,0) -best 75
+let cheeseBacklineColour = [237, 189, 47]; //og 0 //dark orange 227, 178, 32 //light yellow 245, 228, 142
+let cheeseBacklineThickness = (20); // to be visible must be bigger than "outlineThickness"
+  //cheese positions
+  //main cheese
+let mainCheese = (false);
+let mainCheeseSize = (1);
+let mainCheeseX = (27.5); //move cheese X axis (for left corner 0,0) //27.5 for centre
+let mainCheeseY = (75); //move cheese y axis (for left corner 0,0)  //75 for centre
+  //cheese 1 
+let drawCheese1 = (true);
+let cheese1Size = (0.5);
+let cheese1X = (-30);
+let cheese1Y = (-15);
+  //cheese 2
+let drawCheese2 = (true);
+let cheese2Size = (0.5);
+let cheese2X = (-30);
+let cheese2Y = (185);
+  //cheese 3
+let drawCheese3 = (false);
+let cheese3Size = (0.5);
+let cheese3X = (200);
+let cheese3Y = (0);
+  //cheese 4
+let drawCheese4 = (false);
+let cheese4Size = (0.5);
+let cheese4X = (200);
+let cheese4Y = (200);
+
+//frog&cheese paramiters
+let drawFrogCheese = (false);
 
 
 //added if statements:
@@ -133,12 +160,14 @@ let cheeseTransY = (75); //move cheese y axis (og left corner 0,0) -best 75
   //if (drawCheese) //changes things in frog function if cheese is active (cheese shrinks and moves to frog)
   //if (layerdFlowerPetal) which contains if (backFlowerPetal) and if (middleFlowerPetal) //changes how many "petal layers" flowers have
 
+
+let RowOffset = 100
 //---Only Paramiters Above-----------
 
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
-  //pWallpaper.output_mode(GRID_WALLPAPER); 
+  //pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER); 
   //pWallpaper.output_mode(GLIDE_WALLPAPER); 
   
   pWallpaper.resolution(FIT_TO_SCREEN);
@@ -147,11 +176,11 @@ function setup_wallpaper(pWallpaper) {
   //Grid settings
   pWallpaper.grid_settings.cell_width  = 200;
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 100; //nice: 100
+  pWallpaper.grid_settings.row_offset  = (RowOffset); //nice: 100
 }
 
 function wallpaper_background() {
-  background(3, 252, 215); //3, 252, 215 //3, 232, 252 //light water background: 95, 214, 212 //dark water background: 60, 196, 201
+  background(81, 240, 227); //3, 252, 215 //3, 232, 252 //light water background: 95, 214, 212 //dark water background: 60, 196, 201 //best: 50,204,209 with water //81, 240, 227
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
@@ -204,7 +233,34 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 
 
   if (drawCheese){
-    cheese ();
+
+    if (drawFrogCheese){ //makes frog hold cheese
+    push();
+    translate (frogOriginX-16 ,frogOriginY);
+    cheese (0,0, 0.25);
+    pop();
+    
+    push ();
+    
+    if (drawCheese1){
+    cheese (cheese1X, cheese1Y, cheese1Size);
+    }
+    if (drawCheese2){
+    cheese (cheese2X, cheese2Y, cheese2Size);
+    }
+    if (drawCheese3){
+    cheese (cheese3X, cheese3Y, cheese3Size);
+    }
+    if (drawCheese4){
+    cheese (cheese4X, cheese4Y, cheese4Size);
+    }
+    pop();
+    }
+    if (mainCheese){ //draws cheese at centre when cheeseSize is 1
+    cheese (mainCheeseX, mainCheeseY, mainCheeseSize);
+    }
+
+
   }
   
 
@@ -216,7 +272,7 @@ function water (waterColour){
   
 
   push();
-  translate (200, 200)
+  translate (200-RowOffset, 200)
   rotate (180);
   //^moving where water is drawn due to overallping issue when tilling 
 
@@ -376,7 +432,7 @@ if (drawBackline){
 
   //arm backline   
     push ();
-      if (drawCheese){
+      if (drawFrogCheese){
       rotate (180);
       translate (-275, -185);
     }
@@ -392,7 +448,7 @@ if (drawBackline){
     pop ();
     //left hand
     push ();
-    if (drawCheese){
+    if (drawFrogCheese){
       rotate (180);
       translate (-130, -185);
     }
@@ -539,7 +595,7 @@ fill (frogColour); //frog colour
 
 push();
 //right hand
-if (drawCheese){
+if (drawFrogCheese){
   rotate (180);
   translate (-frogOriginX-175, -frogOriginY-85);
 }
@@ -556,7 +612,7 @@ pop ();
 //left hand
 push ();
 
-if (drawCheese){
+if (drawFrogCheese){
 
   rotate (180);
   translate (-frogOriginX-30, -frogOriginY-85);
@@ -769,19 +825,15 @@ function flower (flowerX, flowerY){
 }
 
 
-function cheese (){ 
+function cheese (cheeseX, cheeseY, cheeseSize){ 
    
   push ();
 
-  if (drawFrog){ //makes frog hold cheese
+  // changes cheese size and keeps it at Original cheese postition
+  scale (cheeseSize);
+  translate (-(cheeseX-(cheeseX/cheeseSize)), -(cheeseY-(cheeseY/cheeseSize)));
+  translate (cheeseX, cheeseY)
 
-    translate (frogOriginX-16 ,frogOriginY);
-    scale (0.25);
-  }
-  else {
-
-    translate(cheeseTransX, cheeseTransY);
-  }
   
   //backline
   strokeWeight (cheeseBacklineThickness);
